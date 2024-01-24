@@ -1,18 +1,16 @@
-import * as React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home"
-import InquryRegistration from "./pages/Inqury";
+import PATH from "./path";
+import Home from './pages/Home';
+import Inquiry from './pages/Inquiry';
 
-export const Router: React.FC = () => {
-    return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route index element={<Home />} />
-                    <Route path="/inqury/regstration" element={<InquryRegistration />} />
+const routes = [
+    {
+        path: PATH.HOME,
+        component: Home,
+    },
+    {
+        path: PATH.INQUIRY,
+        component: Inquiry,
+    }
+]
 
-                </Routes>
-            </BrowserRouter>
-        </>
-    )
-}
+export default routes;

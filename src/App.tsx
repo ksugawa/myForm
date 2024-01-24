@@ -1,14 +1,20 @@
 import * as React from 'react';
-import { Router } from './router';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const App: React.FC = () => {
+
+const App: React.FC = () => {
   return (
-    <>
-      <Router />
-    </>
-  );
-}
+    <BrowserRouter>
+        <Routes>
+          <Route path="/"></Route>
+          <Route path="/inquiry"></Route>
+        </Routes>
+
+    </ BrowserRouter>
+
+  )
+};
 
 export default App;
