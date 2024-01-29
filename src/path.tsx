@@ -1,9 +1,6 @@
-import CONST from "./constant";
-
-
 const PATH = {
-        [CONST.HOME]: "/",
-        [CONST.INQUIRY]: `/${CONST.INQUIRY}`,
+        HOME: "/",
+        INQUIRY: "/inquiry",
 }
 
 export default PATH;
