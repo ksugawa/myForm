@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
+import PATH from "../../path"
 import './Inqury.scss'
-//import { Row } from 'react-bootstrap/Row';
+import { Link } from "react-router-dom";
 
 interface FormData {
     id: number;
@@ -51,6 +52,10 @@ const Inqury = (): JSX.Element => {
         <>
             <form onSubmit={handleSubmit} className="form-body">
                 <>
+                <div>
+                    <p>詳細は下記をご確認ください。</p>
+                    <Link to={PATH.HELP} target="_blank">ヘルプページにいく</Link>
+                </div>
 
                     <label>
                         名前
