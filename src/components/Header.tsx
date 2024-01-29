@@ -1,7 +1,18 @@
-import React from 'react'
+import React from 'react';
+import PATH from "../path";
+import { Link } from "react-router-dom";
 
-export default function Header() {
+
+const Header= (): JSX.Element => {
   return (
-    <div>Header</div>
-  )
-}
+    <>
+    <ul>
+      <li>
+        <Link to={PATH.INQUIRY}>お問い合わせ</Link>
+      </li>
+    </ul>
+    </>
+  );
+};
+
+export default Header;
