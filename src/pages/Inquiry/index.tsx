@@ -1,15 +1,19 @@
 import React, { useState, useCallback } from "react";
-import './InquryRegistration.scss'
+import './Inqury.scss'
 //import { Row } from 'react-bootstrap/Row';
 
-type FormData = {
+interface FormData {
     id: number;
     name: string;
+    label: string;
+    value: string;
 };
 
-const InquryRegistration = (): JSX.Element => {
+
+const Inqury = (): JSX.Element => {
     const [name, setName] = useState("");
     const [companyName, setCompanyName] = useState("");
+    const [selected, setSelected] = useState("plan_1");
     const [count, setCount] = useState(0);
     const [groups, setGroups] = useState<FormData[]>([]);
     const [idCounter, setIdCounter] = useState<number>(1);
@@ -17,6 +21,7 @@ const InquryRegistration = (): JSX.Element => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        console.log("Form submitted:", { name, companyName, selected, groups });
     };
 
     const addGroup = () => {
@@ -24,28 +29,29 @@ const InquryRegistration = (): JSX.Element => {
             const formBody: FormData = {
                 id: idCounter,
                 name: "",
-
+                label: "",
+                value: ""
             };
             setIdCounter((prevId: number) => prevId + 1);
-            setGroups(prevGroups => [...prevGroups, formBody]);
-        } else {
-            alert("最大で5つのグループしか追加できません。")
+            setGroups((prevGroups) => [...prevGroups, formBody]);
         };
     };
 
     const handleInputChange = (id: number, key: keyof FormData) =>
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            setGroups(prevGroups =>
-                prevGroups.map((group =>
+            setGroups((prevGroups) =>
+                prevGroups.map((group) =>
                     group.id === id ? { ...group, [key]: e.target.value } : group
                 )
-                ));
+            );
         };
+
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="form-body">
                 <>
+
                     <label>
                         名前
                         <input
@@ -90,4 +96,4 @@ const InquryRegistration = (): JSX.Element => {
     );
 };
 
-export default InquryRegistration;
+export default Inqury;
