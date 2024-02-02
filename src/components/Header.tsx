@@ -1,4 +1,3 @@
-import React from 'react';
 import PATH from "../path";
 import { Link } from "react-router-dom";
 
