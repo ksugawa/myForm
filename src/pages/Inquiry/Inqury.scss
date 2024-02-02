@@ -1,21 +1,42 @@
 .button-add {
-    display: block;
-    width:150px;
-    height: 30px;
-    margin: 0 auto;
-    background-color: bisque;
-    border-radius: 10px;
-    padding: 1rem;
-    border: none;
+  width: 150px;
+  background-color: bisque;
+  color: #232323;
+  border: none;
+}
+
+.submit-btn {
+  margin: 0 auto;
+  width: 150px;
 }
 
 .form-body {
-    width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-label {
+  width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  label {
     width: 100%;
-    margin-bottom: 1rem;
+  }
+  .form-item {
+    border-bottom: 1px solid #e1e0e0;
+    padding: 1rem 0;
+  }
+  .required {
+    font-size: 12px;
+    color: #D92B2B;
+    border: 1px solid #D92B2B;
+    border-radius: 8px;
+    padding: 4px;
+    margin-right: 8px;
+
+  }
+  input {
+    width: 100%;
+    border: 1px solid #e1e0e0;
+    border-radius: 4px;
+    padding: 4px 8px;
+  }
+  ::placeholder {
+    color: #ccc;
+  }
 }

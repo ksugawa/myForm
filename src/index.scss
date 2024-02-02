@@ -1,12 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+
 :root {
   --input-bg-color: #dbdbdd;
 }
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #232323;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,4 +29,56 @@ code {
 
 .input {
   background-color: var(--input-bg-color);
+}
+
+ul {
+  list-style: none;
+}
+
+header, 
+main {
+  padding: 1rem;
+}
+
+main {
+  width: 1280px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+header {
+  width: 1080px;
+  max-width: 1080px;
+  margin-left: auto;
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+  color: #232323;
+  cursor: pointer;
+}
+
+nav {
+  width: 314px;
+}
+
+.pb-16 {
+  padding-bottom: 1rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.text-right {
+  text-align: right;
 }
