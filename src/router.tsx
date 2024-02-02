@@ -15,7 +15,7 @@ const routes = [
     {
         path: PATH.HELP,
         component: Help,
-    }
-]
+    },
+];
 
 export default routes;
