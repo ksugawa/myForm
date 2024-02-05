@@ -100,12 +100,7 @@ const Inqury = () => {
 
 
     return (
-        <>
-            <form onSubmit={handleSubmit} className="form-body">
-                <>
-                <div>
-                    <p>詳細は下記をご確認ください。</p>
-                    <Link to={PATH.HELP} target="_blank">ヘルプページにいく</Link>
+        <Layout>
                 </div>
 
                     <label>
@@ -148,7 +143,7 @@ const Inqury = () => {
                 </>
                 <input type="submit" value="Submit" />
             </form>
-        </>
+        </Layout>
     );
 };
 
