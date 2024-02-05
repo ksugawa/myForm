@@ -1,4 +1,7 @@
-import React, { ChangeEvent, useState, useCallback } from "react";
+import React, { ChangeEvent, useState, useCallback, useEffect } from "react";
+import RegisterData from './component/RegisterData';
+import initialValues from "./component/InitialValues";
+import SCHEMA from "./component/Schema";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -80,7 +83,7 @@ const Inqury = () => {
     } = useForm({
         mode: 'onBlur',
         defaultValues: initialValues,
-        resolver: yupResolver(schema),
+        resolver: yupResolver(SCHEMA),
     });
 
     const [zipcode, setZip] = useState("");
@@ -88,7 +91,7 @@ const Inqury = () => {
     const [address, setAddress] = useState("")
     const [selected, setSelected] = useState("plan_1");
     const [count, setCount] = useState(0);
-    const [groups, setGroups] = useState<FormData[]>([]);
+    const [groups, setGroups] = useState<RegisterData[]>([]);
     const [idCounter, setIdCounter] = useState<number>(1);
 
     // 郵便番号検索API 
