@@ -1,7 +1,11 @@
+// path.tsx
 const PATH = {
         HOME: "/",
         INQUIRY: "/inquiry",
-        HELP: "/help"
-}
-
-export default PATH;
+        REGISTER: "/inquiry/register",
+        CONFIRM: "/inquiry/confirm",
+        HELP: "/help",
+    };
+    
+    export default PATH;
+    

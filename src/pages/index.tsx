@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 
 const Home = lazy(() => import('./Home'));
-const Inquiry = lazy(() => import('./Inquiry'));
+const Register = lazy(() => import('./Inquiry/Register'));
+const Confirm = lazy(() => import('./Inquiry/Confirm'));
 
-export { Home, Inquiry }; 
+
+export { Home, Register, Confirm }; 

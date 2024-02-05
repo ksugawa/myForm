@@ -1,6 +1,7 @@
 import PATH from "./path";
 import Home from './pages/Home';
-import Inquiry from './pages/Inquiry';
+import Register from './pages/Inquiry/Register';
+import Confirm from "./pages/Inquiry/Confirm";
 import Help from './components/Help';
 
 const routes = [
@@ -9,8 +10,12 @@ const routes = [
         component: Home,
     },
     {
-        path: PATH.INQUIRY,
-        component: Inquiry,
+        path: PATH.REGISTER,
+        component: Register,
+    },
+    {
+        path: PATH.CONFIRM,
+        component: Confirm,
     },
     {
         path: PATH.HELP,
