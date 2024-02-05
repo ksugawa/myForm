@@ -1,7 +1,7 @@
 import PATH from "./path";
 import Home from './pages/Home';
 import Inquiry from './pages/Inquiry';
-import Help from './pages/Inquiry/component/Help';
+import Help from './components/Help';
 
 const routes = [
     {
