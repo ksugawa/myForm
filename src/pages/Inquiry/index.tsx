@@ -76,14 +76,25 @@ const Inqury = () => {
 
     const onSubmit = (data: any) => console.log(data);
 
-    const handleInputChange = (id: number, key: keyof FormData) =>
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            setGroups((prevGroups) =>
-                prevGroups.map((group) =>
-                    group.id === id ? { ...group, [key]: e.target.value } : group
-                )
-            );
-        };
+    // const handleAddDept = () => {
+    //     if (groups.length < 5) {
+    //         const formBody: FormData = {
+    //             id: idCounter,
+    //             dept_name: "",
+    //         };
+    //         setIdCounter((prevId: number) => prevId + 1);
+    //         setGroups((prevGroups) => [...prevGroups, formBody]);
+    //     };
+    // };
+
+    // const handleInputChange = (id: number, key: keyof FormData) =>
+    //     (e: React.ChangeEvent<HTMLInputElement>) => {
+    //         setGroups((prevGroups) =>
+    //             prevGroups.map((group) =>
+    //                 group.id === id ? { ...group, [key]: e.target.value } : group
+    //             )
+    //         );
+    // };
 
 
     return (
