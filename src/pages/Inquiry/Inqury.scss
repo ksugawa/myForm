@@ -1,42 +1,74 @@
 .button-add {
   width: 150px;
-  background-color: bisque;
-  color: #232323;
+  background-color: #FF8C37;
+  color: #fff;
   border: none;
 }
 
 .submit-btn {
-  margin: 0 auto;
+  display: block;
+  margin: 3rem auto;
   width: 150px;
+}
+
+.address-serach-btn {
+  width: 92px;
+  border: 1px solid #232323;
+  background: #fff;
+  color: #232323;
 }
 
 .form-body {
   width: 800px;
   margin: 0 auto;
   padding: 2rem;
-  label {
-    width: 100%;
-  }
-  .form-item {
-    border-bottom: 1px solid #e1e0e0;
+  .form-details-contents {
+    text-align: center;
     padding: 1rem 0;
   }
-  .required {
-    font-size: 12px;
-    color: #D92B2B;
-    border: 1px solid #D92B2B;
-    border-radius: 8px;
-    padding: 4px;
-    margin-right: 8px;
+  .form-body-container {
+    margin: 2rem auto;
+    label {
+      width: 100%;
+    }
+    .form-item {
+      border-bottom: 1px solid #e1e0e0;
+      padding: 1rem 0;
+    }
+    .required {
+      font-size: 12px;
+      color: #d92b2b;
+      border: 1px solid #d92b2b;
+      border-radius: 8px;
+      padding: 4px;
+      margin-right: 8px;
+    }
+    input {
+      width: 100%;
+      border: 1px solid #e1e0e0;
+      background: #e1e0e0;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+    ::placeholder {
+      color: #7d7d7d;
+    }
+    .check-box-area {
+      justify-content: center;
+      text-align: center;
 
-  }
-  input {
-    width: 100%;
-    border: 1px solid #e1e0e0;
-    border-radius: 4px;
-    padding: 4px 8px;
-  }
-  ::placeholder {
-    color: #ccc;
+      input.checkBox {
+        width: 22px;
+        height: 22px;
+        background: #fff;
+        display: inline-block;
+        margin-right: 1rem;
+      }
+    }
+    .error-msg {
+      color: #d92b2b;
+      font-size: 12px;
+      font-weight: bold;
+    }
   }
 }

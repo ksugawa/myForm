@@ -4,75 +4,12 @@ import initialValues from "./component/InitialValues";
 import SCHEMA from "./component/Schema";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import PATH from "../../path";
 import './Inqury.scss';
-import { Row, Col, Button, FormCheck } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Layout from '../../components/Layout';
 import axios from "axios";
-
-
-/***
- * 会員登録フォーム初期値
- * @return 
- */
-const initialValues = {
-    company_name: "",
-    company_name_kana: "",
-    company_tel: "",
-    company_email: "",
-    zipcode: "",
-    prefecture: "",
-    address: "",
-    member_name: "",
-    dept_name: "",
-};
-
-
-/***
- * 会員登録フォームスキーマ
- */
-const schema = yup.object({
-    // 会社名
-    company_name: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-    company_name_kana: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-    company_tel: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-    company_email: yup
-        .string()
-        .email('メールアドレスの形式ではありません。')
-        .required('※入力必須の項目です。')
-        .max(100),
-    postcode: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-    prefecture: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-    address: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-    member_name: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-    dept_name: yup
-        .string()
-        .required('※入力必須の項目です。')
-        .max(100),
-});
 
 
 const Inqury = () => {
@@ -219,7 +156,7 @@ const Inqury = () => {
                     <Row className="form-item align-items-center">
                         <Row>
                             <Col xs={5}>
-                    <label>
+                                <label>
                                     <span className="required">必須</span>住所
                                 </label>
                             </Col>
@@ -229,12 +166,12 @@ const Inqury = () => {
                             <Col xs={5}>
                                 <label htmlFor="zipcode" className="text-right">郵便番号</label>
                             </Col>
-                            <Col xs={5}>
-                                <input
+                                <Col xs={5}>
+                                    <input
                                         id="zipcode"
                                         {...register('zipcode', {
-                                        required: true
-                                    })}
+                                            required: true
+                                        })}
                                         onChange={(e) => setZip(e.target.value)}
                                         placeholder="例)　1000000"
 
@@ -248,7 +185,7 @@ const Inqury = () => {
                                         住所検索
                                     </Button>
 
-                            </Col>
+                                </Col>
                         </Row>
                         <Row className="pb-16">
                             <Col xs={5}>
@@ -272,7 +209,7 @@ const Inqury = () => {
                                 <label htmlFor="address" className="text-right">市区町村</label>
                             </Col>
                             <Col xs={5}>
-                        <input
+                                <input
                                     id="address"
                                     {...register('address', {
                                         required: true
@@ -292,10 +229,10 @@ const Inqury = () => {
                         <Col xs={5}>
                             <label htmlFor="member_name">
                                 <span className="required">必須</span>担当者名
-                    </label>
+                            </label>
                         </Col>
                         <Col xs={5}>
-                        <input
+                            <input
                                 id="member_name"
                                 {...register('member_name', {
                                     required: true
@@ -309,7 +246,7 @@ const Inqury = () => {
                         <Col xs={5}>
                             <label htmlFor="dept_name">
                                 <span className="required">必須</span>担当者部署名
-                    </label>
+                            </label>
                         </Col>
                         <Col xs={5}>
                             <input
@@ -325,38 +262,44 @@ const Inqury = () => {
                     <Row className="form-item align-items-center">
                         <Button
                             type="button"
-                        className="button-add"
+                            className="button-add"
                         // onClick={handleAddDept}
-                    >
+                        >
                             担当部署追加
                         </Button>
                         <Row className="pt-16 pb-16 align-items-center">
                             <Col xs={5}>
-                                <label htmlFor="dept_name">担当者部署１</label>
+                                <label htmlFor="dept_name1">担当者部署１</label>
                             </Col>
                             <Col xs={5}>
                                 <input
-                                    id="dept_name"
-                                    {...register('dept_name', { required: true })}
+                                    id="dept_name1"
+                                    {...register('dept_name1', { required: true })}
                                     placeholder="例)　営業部"
                                 />
                             </Col>
                         </Row>
                     </Row>
                     {/* {groups.map((group) => (
-                        <div key={group.id}>
-                            <input
-                                type="text"
-                                placeholder={`承認者 ${group.id}`}
-                                value={group.name}
-                                onChange={handleInputChange(group.id, 'name')}
+                    <div key={group.id}>
+                        <input
+                            type="text"
+                            placeholder={`承認者 ${group.id}`}
+                            value={group.name}
+                            onChange={handleInputChange(group.id, 'name')}
 
-                            />
-                        </div>
+                        />
+                    </div>
                 ))} */}
                     <Row className="form-item check-box-area">
                         <div className="d-flex align-items-center center">
-                            <FormCheck /><span>個人情報の取扱規程に同意する</span>
+                            <input
+                                type="checkbox"
+                                className="checkBox"
+                                id="checked"
+                                {...register('checked', { required: true })}
+                            />
+                            <span>個人情報の取扱規程に同意する</span>
                         </div>
                         <span>当社の<Link to="" className="link-text">個人情報の取扱規程について</Link>同意される方のみ送信できます。</span>
                     </Row>
