@@ -7,6 +7,7 @@ import './Inqury.scss';
 import { Row, Col, Button, FormCheck } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Layout from '../../components/Layout';
+import axios from "axios";
 
 
 /***
@@ -18,7 +19,7 @@ const initialValues = {
     company_name_kana: "",
     company_tel: "",
     company_email: "",
-    postcode: "",
+    zipcode: "",
     prefecture: "",
     address: "",
     member_name: "",
@@ -82,10 +83,29 @@ const Inqury = () => {
         resolver: yupResolver(schema),
     });
 
+    const [zipcode, setZip] = useState("");
+    const [prefecture, setPrefecture] = useState("");
+    const [address, setAddress] = useState("")
     const [selected, setSelected] = useState("plan_1");
     const [count, setCount] = useState(0);
     const [groups, setGroups] = useState<FormData[]>([]);
     const [idCounter, setIdCounter] = useState<number>(1);
+
+    // 郵便番号検索API 
+
+    const handleGetAddress = async (): Promise<void> => {
+        const res = await axios.get("https://zipcloud.ibsnet.co.jp/api/search", {
+            params: { zipcode: zipcode },
+        });
+        console.log(res)
+        if (res.data.status === 200) {
+            setPrefecture(res.data.results[0].address1);
+            setAddress(res.data.results[0].address2 + res.data.results[0].address3);
+        } else {
+            setPrefecture("");
+            setAddress("");
+        }
+    };
 
     const onSubmit = (data: any) => console.log(data);
 
@@ -204,16 +224,27 @@ const Inqury = () => {
                         </Row>
                         <Row className="pb-16">
                             <Col xs={5}>
-                                <label htmlFor="postcode" className="text-right">郵便番号</label>
+                                <label htmlFor="zipcode" className="text-right">郵便番号</label>
                             </Col>
                             <Col xs={5}>
                                 <input
-                                    id="postcode"
-                                    {...register('postcode', {
+                                        id="zipcode"
+                                        {...register('zipcode', {
                                         required: true
                                     })}
+                                        onChange={(e) => setZip(e.target.value)}
+                                        placeholder="例)　1000000"
 
-                                />
+                                    />
+                                </Col>
+                                <Col>
+                                    <Button 
+                                        className="address-serach-btn"
+                                        onClick={handleGetAddress}
+                                    >
+                                        住所検索
+                                    </Button>
+
                             </Col>
                         </Row>
                         <Row className="pb-16">
@@ -226,6 +257,9 @@ const Inqury = () => {
                                     {...register('prefecture', {
                                         required: true
                                     })}
+                                    value={prefecture}
+                                    onChange={(e) => setPrefecture(e.target.value)}
+                                    placeholder="例)　東京"
 
                                 />
                             </Col>
@@ -240,9 +274,12 @@ const Inqury = () => {
                                     {...register('address', {
                                         required: true
                                     })}
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                    placeholder="例)　千代田区"
                                 />
                             </Col>
-                            <span className="error-msg">{errors.postcode?.message}</span>
+                            <span className="error-msg">{errors.zipcode?.message}</span>
                             <span className="error-msg">{errors.prefecture?.message}</span>
                             <span className="error-msg">{errors.address?.message}</span>
 
