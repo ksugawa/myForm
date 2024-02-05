@@ -79,7 +79,7 @@ const Inqury = () => {
     const {
         register,
         handleSubmit,
-        formState: { isDirty, errors },
+        formState: { isDirty, isValid, errors },
     } = useForm({
         mode: 'onBlur',
         defaultValues: initialValues,
@@ -361,7 +361,7 @@ const Inqury = () => {
                         <span>当社の<Link to="" className="link-text">個人情報の取扱規程について</Link>同意される方のみ送信できます。</span>
                     </Row>
                     <Button
-                        disabled={!isDirty}
+                        disabled={!isDirty || !isValid}
                         type="submit"
                         className="submit-btn"
                         value="Submit"
