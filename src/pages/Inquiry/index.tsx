@@ -10,10 +10,61 @@ interface FormData {
     value: string;
 };
 
+/***
+ * 
+ * 会員登録フォームスキーマ
+ */
+const schema = yup.object({
+    // 会社名
+    company_name: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+    company_name_kana: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+    company_tel: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+    company_email: yup
+        .string()
+        .email('メールアドレスの形式ではありません。')
+        .required('※入力必須の項目です。')
+        .max(100),
+    postcode: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+    prefecture: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+    address: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+    member_name: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+    dept_name: yup
+        .string()
+        .required('※入力必須の項目です。')
+        .max(100),
+});
 
-const Inqury = (): JSX.Element => {
-    const [name, setName] = useState("");
-    const [companyName, setCompanyName] = useState("");
+
+const Inqury = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
+
     const [selected, setSelected] = useState("plan_1");
     const [count, setCount] = useState(0);
     const [groups, setGroups] = useState<FormData[]>([]);
