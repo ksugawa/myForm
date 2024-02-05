@@ -8,14 +8,25 @@ import { Row, Col, Button, FormCheck } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Layout from '../../components/Layout';
 
-interface FormData {
-    id: number;
-    label: string;
-    value: string;
-};
 
 /***
- * 
+ * 会員登録フォーム初期値
+ * @return 
+ */
+const initialValues = {
+    company_name: "",
+    company_name_kana: "",
+    company_tel: "",
+    company_email: "",
+    postcode: "",
+    prefecture: "",
+    address: "",
+    member_name: "",
+    dept_name: "",
+};
+
+
+/***
  * 会員登録フォームスキーマ
  */
 const schema = yup.object({
@@ -66,6 +77,8 @@ const Inqury = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
+        mode: 'onBlur',
+        defaultValues: initialValues,
         resolver: yupResolver(schema),
     });
 
