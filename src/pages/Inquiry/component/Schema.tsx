@@ -6,8 +6,8 @@ import * as yup from 'yup';
  */
 const SCHEMA = yup
     .object({
-        company_name: yup.string().max(100),
-        company_name_kana: yup.string().max(100),
+        name: yup.string().max(100),
+        name_kana: yup.string().max(100),
         company_tel: yup.string().max(100),
         company_email: yup.string()
             .email('メールアドレスの形式ではありません。')
@@ -15,14 +15,7 @@ const SCHEMA = yup
         zipcode: yup.string().max(100),
         prefecture: yup.string().max(100),
         address: yup.string().max(100),
-        member_name: yup.string().max(100),
         checked: yup.boolean(),
-        depts: yup.array().of(
-            yup.object({
-                deptName: yup.string().max(100)
-            })
-        ),
-
     })
     .required('※入力必須の項目です。');
 

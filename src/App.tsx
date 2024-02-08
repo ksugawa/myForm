@@ -1,10 +1,8 @@
-import * as React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './components/ErrorFallback';
 import routes from './router';
 import './App.css';
-import axios from 'axios';
 
 
 const App = () => {
