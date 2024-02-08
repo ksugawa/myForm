@@ -1,6 +1,6 @@
 .button-add {
   width: 150px;
-  background-color: #FF8C37;
+  background-color: #ff8c37;
   color: #fff;
   border: none;
 }
@@ -12,7 +12,7 @@
 }
 
 .address-serach-btn {
-  width: 92px;
+  font-size: 14px;
   border: 1px solid #232323;
   background: #fff;
   color: #232323;
@@ -28,10 +28,17 @@
   }
   .form-body-container {
     margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     label {
       width: 100%;
     }
     .form-item {
+      width: 88%;
+      align-items: center;
+      justify-content: flex-start;
       border-bottom: 1px solid #e1e0e0;
       padding: 1rem 0;
     }
@@ -48,7 +55,7 @@
       border: 1px solid #e1e0e0;
       background: #e1e0e0;
       border-radius: 4px;
-      padding: 4px 8px;
+      padding: 4px 12px;
     }
     ::placeholder {
       color: #7d7d7d;

@@ -1,14 +1,14 @@
-import React, { ChangeEvent, useState, useCallback, useEffect } from "react";
-import RegisterData from './component/RegisterData';
-import initialValues from "./component/InitialValues";
-import SCHEMA from "./component/Schema";
-import { useForm } from 'react-hook-form';
+import React, { useState } from "react";
+import RegisterData from '../component/RegisterData';
+import initialValues from "../component/InitialValues";
+import SCHEMA from "../component/Schema";
+import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import PATH from "../../path";
-import './Inqury.scss';
+import PATH from "../../../path";
+import '../Inqury.scss';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import Layout from '../../components/Layout';
+import Layout from '../../../components/Layout';
 import axios from "axios";
 
 
@@ -16,6 +16,8 @@ const Inqury = () => {
     const {
         register,
         handleSubmit,
+        reset,
+        control,
         formState: { isDirty, isValid, errors },
     } = useForm({
         mode: 'onBlur',
@@ -26,13 +28,9 @@ const Inqury = () => {
     const [zipcode, setZip] = useState("");
     const [prefecture, setPrefecture] = useState("");
     const [address, setAddress] = useState("")
-    const [selected, setSelected] = useState("plan_1");
     const [count, setCount] = useState(0);
-    const [groups, setGroups] = useState<RegisterData[]>([]);
-    const [idCounter, setIdCounter] = useState<number>(1);
 
     // 郵便番号検索API 
-
     const handleGetAddress = async (): Promise<void> => {
         const res = await axios.get("https://zipcloud.ibsnet.co.jp/api/search", {
             params: { zipcode: zipcode },
@@ -47,27 +45,38 @@ const Inqury = () => {
         }
     };
 
-    const onSubmit = (data: any) => console.log(data);
+    const onSubmit = (data: any) => {
+        console.log(data);
+        const list = [];
+        data.depts.forEach((item: {
+            deptName: any; dept_name: any;
+        }, index: any) => list.push(`\n担当部署${index}:${item.deptName}`)
+        );
+        reset();
+    };
 
-    // const handleAddDept = () => {
-    //     if (groups.length < 5) {
-    //         const formBody: FormData = {
-    //             id: idCounter,
-    //             dept_name: "",
-    //         };
-    //         setIdCounter((prevId: number) => prevId + 1);
-    //         setGroups((prevGroups) => [...prevGroups, formBody]);
-    //     };
+    // 担当部署追加
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "depts"
+    });
+
+    // const handleAddDept = (data) => {
+    //     const list = [];
+    //     data.depts.forEach((item: { dept_name: any; }, index: any) =>
+    //         list.push(`\n担当部署${index}:${item.dept_name}`)
+    //     );
+    //     reset();
     // };
 
-    // const handleInputChange = (id: number, key: keyof FormData) =>
-    //     (e: React.ChangeEvent<HTMLInputElement>) => {
-    //         setGroups((prevGroups) =>
-    //             prevGroups.map((group) =>
-    //                 group.id === id ? { ...group, [key]: e.target.value } : group
-    //             )
-    //         );
-    // };
+    const countUp = () => setCount(count + 1);
+
+    const reduce = () => {
+        if (count > 0) {
+            remove(count);
+            setCount(count - 1);
+        }
+    };
 
 
     return (
@@ -85,13 +94,13 @@ const Inqury = () => {
                 </div>
 
                 <div className="form-body-container">
-                    <Row className="form-item align-items-center">
+                    <Row className="form-item">
                         <Col xs={5}>
                             <label htmlFor="company_name">
                                 <span className="required">必須</span>会社名
                             </label>
                         </Col>
-                        <Col xs={5}>
+                        <Col xs={7}>
                             <input
                                 id="company_name"
                                 {...register('company_name', {
@@ -102,13 +111,13 @@ const Inqury = () => {
                             <span className="error-msg">{errors.company_name?.message}</span>
                         </Col>
                     </Row>
-                    <Row className="form-item align-items-center">
+                    <Row className="form-item">
                         <Col xs={5}>
                             <label htmlFor="company_name_kana">
                                 <span className="required">必須</span>会社名フリガナ
                             </label>
                         </Col>
-                        <Col xs={5}>
+                        <Col xs={7}>
                             <input
                                 id="company_name_kana"
                                 {...register('company_name_kana', {
@@ -119,13 +128,13 @@ const Inqury = () => {
                             <span className="error-msg">{errors.company_name_kana?.message}</span>
                         </Col>
                     </Row>
-                    <Row className="form-item align-items-center">
+                    <Row className="form-item">
                         <Col xs={5}>
                             <label htmlFor="company_tel">
                                 <span className="required">必須</span>電話番号
                             </label>
                         </Col>
-                        <Col xs={5}>
+                        <Col xs={7}>
                             <input
                                 id="company_tel"
                                 {...register('company_tel', {
@@ -136,13 +145,13 @@ const Inqury = () => {
                             <span className="error-msg">{errors.company_tel?.message}</span>
                         </Col>
                     </Row>
-                    <Row className="form-item align-items-center">
+                    <Row className="form-item">
                         <Col xs={5}>
                             <label htmlFor="company_email">
                                 <span className="required">必須</span>メールアドレス
                             </label>
                         </Col>
-                        <Col xs={5}>
+                        <Col xs={7}>
                             <input
                                 id="company_email"
                                 {...register('company_email', {
@@ -153,45 +162,45 @@ const Inqury = () => {
                             <span className="error-msg">{errors.company_email?.message}</span>
                         </Col>
                     </Row>
-                    <Row className="form-item align-items-center">
+                    <Row className="form-item">
                         <Row>
-                            <Col xs={5}>
+                            <Col xs={7}>
                                 <label>
                                     <span className="required">必須</span>住所
                                 </label>
                             </Col>
 
                         </Row>
-                        <Row className="pb-16">
+                        <Row className="pb-2 align-items-center">
                             <Col xs={5}>
                                 <label htmlFor="zipcode" className="text-right">郵便番号</label>
                             </Col>
-                                <Col xs={5}>
-                                    <input
-                                        id="zipcode"
-                                        {...register('zipcode', {
-                                            required: true
-                                        })}
-                                        onChange={(e) => setZip(e.target.value)}
-                                        placeholder="例)　1000000"
+                            <Col xs={3}>
+                                <input
+                                    id="zipcode"
+                                    {...register('zipcode', {
+                                        required: true
+                                    })}
+                                    onChange={(e) => setZip(e.target.value)}
+                                    placeholder="例)　1000000"
 
-                                    />
-                                </Col>
-                                <Col>
-                                    <Button 
-                                        className="address-serach-btn"
-                                        onClick={handleGetAddress}
-                                    >
-                                        住所検索
-                                    </Button>
+                                />
+                            </Col>
+                            <Col>
+                                <Button
+                                    className="address-serach-btn"
+                                    onClick={handleGetAddress}
+                                >
+                                    住所検索
+                                </Button>
 
-                                </Col>
+                            </Col>
                         </Row>
-                        <Row className="pb-16">
+                        <Row className="pb-2 align-items-center">
                             <Col xs={5}>
                                 <label htmlFor="prefecture" className="text-right">都道府県</label>
                             </Col>
-                            <Col xs={5}>
+                            <Col xs={3}>
                                 <input
                                     id="prefecture"
                                     {...register('prefecture', {
@@ -204,11 +213,11 @@ const Inqury = () => {
                                 />
                             </Col>
                         </Row>
-                        <Row className="pb-16">
+                        <Row className="pb-2 align-items-center">
                             <Col xs={5}>
                                 <label htmlFor="address" className="text-right">市区町村</label>
                             </Col>
-                            <Col xs={5}>
+                            <Col xs={7}>
                                 <input
                                     id="address"
                                     {...register('address', {
@@ -225,13 +234,13 @@ const Inqury = () => {
 
                         </Row>
                     </Row>
-                    <Row className="form-item align-items-center">
+                    <Row className="form-item">
                         <Col xs={5}>
                             <label htmlFor="member_name">
                                 <span className="required">必須</span>担当者名
                             </label>
                         </Col>
-                        <Col xs={5}>
+                        <Col xs={7}>
                             <input
                                 id="member_name"
                                 {...register('member_name', {
@@ -242,55 +251,34 @@ const Inqury = () => {
                             <span className="error-msg">{errors.member_name?.message}</span>
                         </Col>
                     </Row>
-                    <Row className="form-item align-items-center">
-                        <Col xs={5}>
-                            <label htmlFor="dept_name">
-                                <span className="required">必須</span>担当者部署名
-                            </label>
-                        </Col>
-                        <Col xs={5}>
-                            <input
-                                id="dept_name"
-                                {...register('dept_name', {
-                                    required: true
-                                })}
-                                placeholder="例)　営業部"
-                            />
-                            <span className="error-msg">{errors.dept_name?.message}</span>
-                        </Col>
-                    </Row>
-                    <Row className="form-item align-items-center">
+                    <Row className="form-item">
                         <Button
                             type="button"
                             className="button-add"
-                        // onClick={handleAddDept}
+                            onClick={() => [append({ deptName: "" }), countUp()]}
                         >
                             担当部署追加
                         </Button>
-                        <Row className="pt-16 pb-16 align-items-center">
-                            <Col xs={5}>
-                                <label htmlFor="dept_name1">担当者部署１</label>
-                            </Col>
-                            <Col xs={5}>
-                                <input
-                                    id="dept_name1"
-                                    {...register('dept_name1', { required: true })}
-                                    placeholder="例)　営業部"
-                                />
-                            </Col>
-                        </Row>
+                        {fields.map((field, index) => (
+                            <div key={field.id}>
+                                <Row className="pt-2 pb-2 align-items-center">
+                                    <Col xs={5}>
+                                        <label htmlFor={`depts.${index}.deptName`}>
+                                            担当部署{index}
+                                        </label>
+                                    </Col>
+                                    <Col xs={7}>
+                                        <input
+                                            id={`depts.${index}.deptName`}
+                                            {...register(`depts.${index}.deptName`)}
+                                            placeholder={`例) 営業部`}
+                                        />
+                                    </Col>
+                                </Row>
+                            </div>
+                        ))}
                     </Row>
-                    {/* {groups.map((group) => (
-                    <div key={group.id}>
-                        <input
-                            type="text"
-                            placeholder={`承認者 ${group.id}`}
-                            value={group.name}
-                            onChange={handleInputChange(group.id, 'name')}
 
-                        />
-                    </div>
-                ))} */}
                     <Row className="form-item check-box-area">
                         <div className="d-flex align-items-center center">
                             <input
@@ -312,7 +300,7 @@ const Inqury = () => {
                     </Button>
                 </div>
             </form>
-        </Layout>
+        </Layout >
     );
 };
 

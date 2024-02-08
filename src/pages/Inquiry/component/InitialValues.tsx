@@ -11,8 +11,7 @@ const initialValues = {
     prefecture: "",
     address: "",
     member_name: "",
-    dept_name: "",
-    dept_name1: "",
+    depts: [{ deptName: "" }],
     checked: false,
 };
 
