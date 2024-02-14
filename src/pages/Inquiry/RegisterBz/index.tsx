@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import RegisterData from '../component/RegisterData';
 import initialValues from "../component/InitialValues";
 import SCHEMA from "../component/Schema";
 import { useForm, useFieldArray } from 'react-hook-form';
@@ -12,7 +11,7 @@ import Layout from '../../../components/Layout';
 import axios from "axios";
 
 
-const Inqury = () => {
+const RegisterBz = (): JSX.Element => {
     const {
         register,
         handleSubmit,
@@ -47,15 +46,15 @@ const Inqury = () => {
 
     const onSubmit = (data: any) => {
         console.log(data);
-        const list = [];
-        data.depts.forEach((item: {
-            deptName: any; dept_name: any;
-        }, index: any) => list.push(`\n担当部署${index}:${item.deptName}`)
-        );
-        reset();
+        // const list = [];
+        // data.depts.forEach((item: {
+        //     deptName: any; dept_name: any;
+        // }, index: any) => list.push(`\n担当部署${index}:${item.deptName}`)
+        // );
+        // reset();
     };
 
-    // 担当部署追加
+    /*担当部署
     const { fields, append, remove } = useFieldArray({
         control,
         name: "depts"
@@ -68,15 +67,16 @@ const Inqury = () => {
     //     );
     //     reset();
     // };
+    */
 
     const countUp = () => setCount(count + 1);
 
-    const reduce = () => {
-        if (count > 0) {
-            remove(count);
-            setCount(count - 1);
-        }
-    };
+    // const reduce = () => {
+    //     if (count > 0) {
+    //         remove(count);
+    //         setCount(count - 1);
+    //     }
+    // };
 
 
     return (
@@ -252,7 +252,7 @@ const Inqury = () => {
                         </Col>
                     </Row>
                     <Row className="form-item">
-                        <Button
+                        {/* <Button
                             type="button"
                             className="button-add"
                             onClick={() => [append({ deptName: "" }), countUp()]}
@@ -276,7 +276,7 @@ const Inqury = () => {
                                     </Col>
                                 </Row>
                             </div>
-                        ))}
+                        ))} */}
                     </Row>
 
                     <Row className="form-item check-box-area">
@@ -301,7 +301,8 @@ const Inqury = () => {
                 </div>
             </form>
         </Layout >
-    );
+
+)
 };
 
-export default Inqury;
+export default RegisterBz;

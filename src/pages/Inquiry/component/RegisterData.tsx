@@ -3,8 +3,8 @@
 * @return 
 */
 interface RegisterData {
-    name: string | undefined;
-    id: number;
+    name: string,
+    name_kana: string,
     company_name: string,
     company_name_kana: string,
     company_tel: string,
@@ -13,8 +13,6 @@ interface RegisterData {
     prefecture: string,
     address: string,
     member_name: string,
-    depts: { deptName: string }[];
-    deptValue: string;
     checked: boolean,
 };
 

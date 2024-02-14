@@ -3,6 +3,8 @@
  * @return 
  */
 const initialValues = {
+    name: "",
+    name_kana: "",
     company_name: "",
     company_name_kana: "",
     company_tel: "",
@@ -11,7 +13,6 @@ const initialValues = {
     prefecture: "",
     address: "",
     member_name: "",
-    depts: [{ deptName: "" }],
     checked: false,
 };
 
