@@ -5,8 +5,14 @@
 const initialValues = {
     name: "",
     name_kana: "",
+    company_name: "",
+    company_name_kana: "",
     company_tel: "",
     company_email: "",
+    zipcode: "",
+    prefecture: "",
+    address: "",
+    member_name: "",
     checked: false,
 };
 

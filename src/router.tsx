@@ -1,6 +1,7 @@
 import PATH from "./path";
 import Home from './pages/Home';
-import Register from './pages/Inquiry/Register';
+import RegisterInd from './pages/Inquiry/RegisterInd';
+import RegisterBz from './pages/Inquiry/RegisterBz';
 import Confirm from "./pages/Inquiry/Confirm";
 import Help from './components/Help';
 
@@ -10,8 +11,12 @@ const routes = [
         component: Home,
     },
     {
-        path: PATH.REGISTER,
-        component: Register,
+        path: PATH.REGISTER_IND,
+        component: RegisterInd,
+    },
+    {
+        path: PATH.REGISTER_BZ,
+        component: RegisterBz,
     },
     {
         path: PATH.CONFIRM,

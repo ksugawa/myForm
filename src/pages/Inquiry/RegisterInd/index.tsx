@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Col, Button } from 'react-bootstrap';
 import '../Inqury.scss';
+import Layout from '../../../components/Layout';
 
 /***
  * 会員登録フォームスキーマ
@@ -35,7 +36,7 @@ const initialValues = {
     password_confirm: "",
 };
 
-const Inqury = (): JSX.Element => {
+const RegisterInd = (): JSX.Element => {
     const {
         register,
         handleSubmit,
@@ -49,7 +50,7 @@ const Inqury = (): JSX.Element => {
     const onSubmit = (data: any) => console.log(data);
 
     return (
-        <>
+        <Layout>
             <form onSubmit={handleSubmit(onSubmit)} className="form-body">
                 <h1>会員登録フォーム</h1>
 
@@ -115,8 +116,8 @@ const Inqury = (): JSX.Element => {
                     </Button>
                 </div>
             </form>
-        </>
+        </Layout>
     );
 };
 
-export default Inqury;
+export default RegisterInd;
