@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Col, Button } from 'react-bootstrap';
 import '../Inqury.scss';
 import Layout from '../../../components/Layout';
+import PATH from '../../../path';
+import RegisterData from '../component/RegisterData';
 
 /***
  * 会員登録フォームスキーマ
@@ -37,20 +40,25 @@ const initialValues = {
 };
 
 const RegisterInd = (): JSX.Element => {
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
         formState: { isDirty, isValid, errors },
     } = useForm({
-        mode: 'onBlur',
         defaultValues: initialValues,
         resolver: yupResolver(SCHEMA),
     });
 
-    const onSubmit = (data: any) => console.log(data);
-
+    const onSubmit = (data: any) => {
+        console.log(data);
+        router.push(PATH.CONFIRM);
+    };
+    
     return (
         <Layout>
+
             <form onSubmit={handleSubmit(onSubmit)} className="form-body">
                 <h1>会員登録フォーム</h1>
 
@@ -112,7 +120,7 @@ const RegisterInd = (): JSX.Element => {
                         type="submit"
                         className="submit-btn"
                         value="Submit"
-                    >登録
+                    >確認画面へ
                     </Button>
                 </div>
             </form>
